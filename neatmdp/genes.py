@@ -2,7 +2,7 @@
 import warnings
 from random import random
 
-from neatmdp.attributes import FloatAttribute, BoolAttribute, StringAttribute
+from neatmdp.attributes import FloatAttribute, BoolAttribute, StringAttribute, IntegerAttribute
 
 
 # TODO: There is probably a lot of room for simplification of these classes using metaprogramming.
@@ -101,6 +101,16 @@ class DefaultNodeGene(BaseGene):
             d += 1.0
         return d * config.compatibility_weight_coefficient
 
+class MdpNodeGene(BaseGene):
+    _gene_attributes = [IntegerAttribute('dim')]
+
+    def __init__(self, key):
+        assert isinstance(key, int), f"DefaultNodeGene key must be an int, not {key!r}"
+        BaseGene.__init__(self, key)
+    
+    def distance(self, other, config):
+        d = abs(self.dim - other.dim)
+        return d * config.compatibility_weight_coefficient
 
 # TODO: Do an ablation study to determine whether the enabled setting is
 # important--presumably mutations that set the weight to near zero could
