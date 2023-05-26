@@ -4,7 +4,7 @@
 
 import os
 
-import neat
+import neatmdp
 import visualize
 
 # 2-input XOR inputs and expected outputs.
@@ -15,7 +15,7 @@ xor_outputs = [(0.0,), (1.0,), (1.0,), (0.0,)]
 def eval_genomes(genomes, config):
     for genome_id, genome in genomes:
         genome.fitness = 4.0
-        net = neat.nn.FeedForwardNetwork.create(genome, config)
+        net = neatmdp.nn.FeedForwardNetwork.create(genome, config)
         for xi, xo in zip(xor_inputs, xor_outputs):
             output = net.activate(xi)
             genome.fitness -= (output[0] - xo[0]) ** 2
@@ -23,18 +23,18 @@ def eval_genomes(genomes, config):
 
 def run(config_file):
     # Load configuration.
-    config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
+    config = neatmdp.Config(neatmdp.DefaultGenome, neatmdp.DefaultReproduction,
+                         neatmdp.DefaultSpeciesSet, neatmdp.DefaultStagnation,
                          config_file)
 
     # Create the population, which is the top-level object for a NEAT run.
-    p = neat.Population(config)
+    p = neatmdp.Population(config)
 
     # Add a stdout reporter to show progress in the terminal.
-    p.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
+    p.add_reporter(neatmdp.StdOutReporter(True))
+    stats = neatmdp.StatisticsReporter()
     p.add_reporter(stats)
-    p.add_reporter(neat.Checkpointer(5))
+    p.add_reporter(neatmdp.Checkpointer(5))
 
     # Run for up to 300 generations.
     winner = p.run(eval_genomes, 300)
@@ -44,7 +44,7 @@ def run(config_file):
 
     # Show output of the most fit genome against training data.
     print('\nOutput:')
-    winner_net = neat.nn.FeedForwardNetwork.create(winner, config)
+    winner_net = neatmdp.nn.FeedForwardNetwork.create(winner, config)
     for xi, xo in zip(xor_inputs, xor_outputs):
         output = winner_net.activate(xi)
         print("input {!r}, expected output {!r}, got {!r}".format(xi, xo, output))
@@ -55,7 +55,7 @@ def run(config_file):
     visualize.plot_stats(stats, ylog=False, view=True)
     visualize.plot_species(stats, view=True)
 
-    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-4')
+    p = neatmdp.Checkpointer.restore_checkpoint('neat-checkpoint-4')
     p.run(eval_genomes, 10)
 
 

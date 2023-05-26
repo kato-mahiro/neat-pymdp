@@ -14,7 +14,7 @@ from multiprocessing import Pool
 
 import pygame
 
-import neat
+import neatmdp
 from common import eval_mono_image, eval_gray_image, eval_color_image
 
 
@@ -216,16 +216,16 @@ def run():
         config_path = os.path.join(local_dir, 'interactive_config_gray')
 
     # Note that we provide the custom stagnation class to the Config constructor.
-    config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                         neat.DefaultSpeciesSet, InteractiveStagnation,
+    config = neatmdp.Config(neatmdp.DefaultGenome, neatmdp.DefaultReproduction,
+                         neatmdp.DefaultSpeciesSet, InteractiveStagnation,
                          config_path)
 
     config.pop_size = pb.num_cols * pb.num_rows
-    pop = neat.Population(config)
+    pop = neatmdp.Population(config)
 
     # Add a stdout reporter to show progress in the terminal.
-    pop.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
+    pop.add_reporter(neatmdp.StdOutReporter(True))
+    stats = neatmdp.StatisticsReporter()
     pop.add_reporter(stats)
 
     while 1:

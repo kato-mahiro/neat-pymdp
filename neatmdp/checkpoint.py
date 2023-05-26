@@ -5,8 +5,8 @@ import pickle
 import random
 import time
 
-from neat.population import Population
-from neat.reporting import BaseReporter
+from neatmdp.population import Population
+from neatmdp.reporting import BaseReporter
 
 
 class Checkpointer(BaseReporter):

@@ -2,7 +2,7 @@ import math
 import os
 import random
 
-import neat
+import neatmdp
 
 
 # def test_concurrent_nn():

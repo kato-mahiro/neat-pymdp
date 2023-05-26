@@ -1,6 +1,6 @@
 import unittest
 
-from neat.reproduction import DefaultReproduction
+from neatmdp.reproduction import DefaultReproduction
 
 
 class TestSpawnComputation(unittest.TestCase):

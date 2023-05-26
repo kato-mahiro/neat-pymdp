@@ -1,4 +1,4 @@
-from neat.graphs import required_for_output
+from neatmdp.graphs import required_for_output
 
 
 class RecurrentNetwork(object):

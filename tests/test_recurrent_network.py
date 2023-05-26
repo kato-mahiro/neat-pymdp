@@ -1,5 +1,5 @@
-from neat import activations
-from neat.nn import RecurrentNetwork
+from neatmdp import activations
+from neatmdp.nn import RecurrentNetwork
 
 
 def assert_almost_equal(x, y, tol):

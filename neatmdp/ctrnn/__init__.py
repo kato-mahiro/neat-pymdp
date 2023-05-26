@@ -1,7 +1,7 @@
 """Handles the continuous-time recurrent neural network implementation."""
 
 
-from neat.graphs import required_for_output
+from neatmdp.graphs import required_for_output
 
 
 class CTRNNNodeEval(object):

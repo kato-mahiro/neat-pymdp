@@ -1,7 +1,7 @@
 """Implements the core evolution algorithm."""
 
-from neat.math_util import mean
-from neat.reporting import ReporterSet
+from neatmdp.math_util import mean
+from neatmdp.reporting import ReporterSet
 
 
 class CompleteExtinctionException(Exception):

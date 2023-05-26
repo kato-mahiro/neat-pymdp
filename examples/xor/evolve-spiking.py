@@ -6,7 +6,7 @@ import os
 from matplotlib import patches
 from matplotlib import pylab as plt
 
-import neat
+import neatmdp
 import visualize
 
 # Network inputs and expected outputs.
@@ -33,7 +33,7 @@ def compute_output(t0, t1):
 
 def simulate(genome, config):
     # Create a network of "fast spiking" Izhikevich neurons.
-    net = neat.iznn.IZNN.create(genome, config)
+    net = neatmdp.iznn.IZNN.create(genome, config)
     dt = net.get_time_step_msec()
     sum_square_error = 0.0
     simulated = []
@@ -91,8 +91,8 @@ def eval_genomes(genomes, config):
 def run(config_path):
     # Load the config file, which is assumed to live in
     # the same directory as this script.
-    config = neat.Config(neat.iznn.IZGenome, neat.DefaultReproduction,
-                         neat.DefaultSpeciesSet, neat.DefaultStagnation,
+    config = neatmdp.Config(neatmdp.iznn.IZGenome, neatmdp.DefaultReproduction,
+                         neatmdp.DefaultSpeciesSet, neatmdp.DefaultStagnation,
                          config_path)
 
     # For this network, we use two output neurons and use the difference between
@@ -101,14 +101,14 @@ def run(config_path):
     # and this choice may not be the best for tackling a real problem.
     config.output_nodes = 2
 
-    pop = neat.population.Population(config)
+    pop = neatmdp.population.Population(config)
 
     # Add a stdout reporter to show progress in the terminal.
-    pop.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
+    pop.add_reporter(neatmdp.StdOutReporter(True))
+    stats = neatmdp.StatisticsReporter()
     pop.add_reporter(stats)
 
-    pe = neat.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
+    pe = neatmdp.ParallelEvaluator(multiprocessing.cpu_count(), eval_genome)
     winner = pop.run(pe.evaluate, 3000)
 
     # Display the winning genome.
