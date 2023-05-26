@@ -1,19 +1,17 @@
 from setuptools import setup
 
 setup(
-    name='neat-python',
-    version='0.93',
-    author='Alan Mcintyre, Cesar Gomes Miguel, Carolina Feher da Silva, Marcio Lobo Netto',
-    author_email='alan@codereclaimers.com',
-    maintainer='Alan McIntyre',
-    maintainer_email='alan@codereclaimers.com',
-    url='https://github.com/CodeReclaimers/neat-python',
+    name='neat-pymdp',
+    version='0.01',
+    author='kato-mahiro',
+    author_email='katomasahiro10@gmail.com',
+    url='https://github.com/kato-mahiro/neat-pymdp',
     license="BSD",
     description='A NEAT (NeuroEvolution of Augmenting Topologies) implementation',
     long_description='Python implementation of NEAT (NeuroEvolution of Augmenting Topologies), a method ' +
                      'developed by Kenneth O. Stanley for evolving arbitrary neural networks.',
     long_description_content_type= 'text/x-rst',
-    packages=['neat', 'neat/iznn', 'neat/nn', 'neat/ctrnn'],
+    packages=['neatmdp', 'neatmdp/iznn', 'neatmdp/nn', 'neatmdp/ctrnn'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
