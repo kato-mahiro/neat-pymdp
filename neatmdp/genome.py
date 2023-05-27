@@ -7,7 +7,7 @@ from random import choice, random, shuffle
 from neatmdp.activations import ActivationFunctionSet
 from neatmdp.aggregations import AggregationFunctionSet
 from neatmdp.config import ConfigParameter, write_pretty_params
-from neatmdp.genes import DefaultConnectionGene, DefaultNodeGene
+from neatmdp.genes import DefaultConnectionGene, DefaultNodeGene, MdpConnectionGene, MdpNodeGene
 from neatmdp.graphs import creates_cycle
 from neatmdp.graphs import required_for_output
 
@@ -573,6 +573,13 @@ class DefaultGenome(object):
         new_genome.nodes = used_node_genes
         new_genome.connections = used_connection_genes
         return new_genome
+
+class MdpGenome(object):
+    @classmethod
+    def parse_config(cls, param_dict):
+        param_dict['node_gene_type'] = MdpNodeGene
+        param_dict['connection_gene_type'] = MdpConnectionGene
+        return DefaultGenomeConfig(param_dict)
 
 
 def get_pruned_genes(node_genes, connection_genes, input_keys, output_keys):
