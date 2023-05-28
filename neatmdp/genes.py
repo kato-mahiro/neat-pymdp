@@ -2,7 +2,7 @@
 import warnings
 from random import random
 
-from neatmdp.attributes import FloatAttribute, BoolAttribute, StringAttribute, IntegerAttribute
+from neatmdp.attributes import FloatAttribute, BoolAttribute, StringAttribute, IntegerAttribute, MdpAgentAttribute
 
 
 # TODO: There is probably a lot of room for simplification of these classes using metaprogramming.
@@ -133,12 +133,12 @@ class DefaultConnectionGene(BaseGene):
         return d * config.compatibility_weight_coefficient
 
 class MdpConnectionGene(BaseGene):
-    _gene_attributes = [IntegerAttribute('Agent')]
+    _gene_attributes = [MdpAgentAttribute('agent')]
 
     def __init__(self, key):
         assert isinstance(key, tuple), f"DefaultConnectionGene key must be a tuple, not {key!r}"
         BaseGene.__init__(self, key)
 
     def distance(self, other, config):
-        d = abs(self.dim - other.dim)
-        return d * config.compatibility_weight_coefficient
+        #TODO
+        return 0
