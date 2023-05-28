@@ -131,3 +131,14 @@ class DefaultConnectionGene(BaseGene):
         if self.enabled != other.enabled:
             d += 1.0
         return d * config.compatibility_weight_coefficient
+
+class MdpConnectionGene(BaseGene):
+    _gene_attributes = [IntegerAttribute('Agent')]
+
+    def __init__(self, key):
+        assert isinstance(key, tuple), f"DefaultConnectionGene key must be a tuple, not {key!r}"
+        BaseGene.__init__(self, key)
+
+    def distance(self, other, config):
+        d = abs(self.dim - other.dim)
+        return d * config.compatibility_weight_coefficient
