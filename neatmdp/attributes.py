@@ -3,6 +3,9 @@ from random import choice, gauss, random, uniform, randint
 
 from neatmdp.config import ConfigParameter
 
+import pymdp
+from pymdp import utils as mdputils
+
 
 # TODO: There is probably a lot of room for simplification of these classes using metaprogramming.
 
@@ -210,3 +213,20 @@ class StringAttribute(BaseAttribute):
             if default not in options:
                 raise RuntimeError(f'Invalid initial value {default} for {self.name}')
             assert default in options
+
+class MdpAgentAttribute(BaseAttribute):
+    """Class for MDP agent attributes."""
+    
+    #_config_items = {"default": [str, None]}
+
+    def init_value(self, config):
+        A = mdputils.random_A_matrix(2,2)
+        B = mdputils.random_B_matrix(2,2)
+        agent = pymdp.Agent(A,B)
+        return agent
+    
+    def mutate_value(self, value, config):
+        pass
+    
+    def validate(self, config):
+        pass
