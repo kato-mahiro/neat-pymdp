@@ -40,11 +40,9 @@ class FeedForwardNetwork(object):
                     inode, onode = conn_key
                     if onode == node:
                         cg = genome.connections[conn_key]
-                        inputs.append((inode, cg.weight))
+                        inputs.append((inode, cg.agent))
 
                 ng = genome.nodes[node]
-                aggregation_function = config.genome_config.aggregation_function_defs.get(ng.aggregation)
-                activation_function = config.genome_config.activation_defs.get(ng.activation)
-                node_evals.append((node, activation_function, aggregation_function, ng.bias, ng.response, inputs))
+                node_evals.append((node, ng.dim, inputs))
 
         return FeedForwardNetwork(config.genome_config.input_keys, config.genome_config.output_keys, node_evals)
