@@ -4,6 +4,7 @@ from random import choice, gauss, random, uniform, randint
 from neatmdp.config import ConfigParameter
 
 import pymdp
+from pymdp.agent import Agent
 from pymdp import utils as mdputils
 
 
@@ -217,12 +218,12 @@ class StringAttribute(BaseAttribute):
 class MdpAgentAttribute(BaseAttribute):
     """Class for MDP agent attributes."""
     
-    #_config_items = {"default": [str, None]}
+    _config_items = {"default": [str, None]}
 
     def init_value(self, config):
         A = mdputils.random_A_matrix(2,2)
         B = mdputils.random_B_matrix(2,2)
-        agent = pymdp.Agent(A,B)
+        agent = Agent(A,B)
         return agent
     
     def mutate_value(self, value, config):

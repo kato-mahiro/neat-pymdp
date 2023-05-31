@@ -6,7 +6,7 @@ import neatmdp.distributed as distributed
 
 from neatmdp.config import Config
 from neatmdp.population import Population, CompleteExtinctionException
-from neatmdp.genome import DefaultGenome
+from neatmdp.genome import DefaultGenome, MdpGenome
 from neatmdp.reproduction import DefaultReproduction
 from neatmdp.stagnation import DefaultStagnation
 from neatmdp.reporting import StdOutReporter

@@ -574,7 +574,7 @@ class DefaultGenome(object):
         new_genome.connections = used_connection_genes
         return new_genome
 
-class MdpGenome(object):
+class MdpGenome(DefaultGenome):
     @classmethod
     def parse_config(cls, param_dict):
         param_dict['node_gene_type'] = MdpNodeGene
