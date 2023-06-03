@@ -133,7 +133,8 @@ class DefaultConnectionGene(BaseGene):
         return d * config.compatibility_weight_coefficient
 
 class MdpConnectionGene(BaseGene):
-    _gene_attributes = [MdpAgentAttribute('agent')]
+    _gene_attributes = [MdpAgentAttribute('agent'),
+                        BoolAttribute('enabled')]
 
     def __init__(self, key):
         assert isinstance(key, tuple), f"DefaultConnectionGene key must be a tuple, not {key!r}"
